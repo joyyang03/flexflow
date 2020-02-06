@@ -1,0 +1,209 @@
+jobs:
+- name: epa_aqs_ozone_daily_summary
+  datasource: epa_aqs
+  download_url: https://aqs.epa.gov/aqsweb/airdata/download_files.html
+  subsource: ozone_daily_summary
+  accept_regex: .*airdata/daily_44201.*
+  file_type: zip
+  build_root: /home/ubuntu/data
+  source_root: /home/ubuntu/data/epa_aqs
+  labeled_root: None
+  sorted_root: None
+  chunked_root: None
+  output_root: None
+  min_chunksize: 250_000
+  layout_names: 
+    - approxlat_approxlng_yyyy_mm
+    - yyyy_mm_approxlat_approxlng
+  table_names:
+    - raw
+    - default
+  header_raw:
+    - State_Code
+    - County_Code
+    - Site_Num
+    - Parameter_Code
+    - POC
+    - Latitude
+    - Longitude
+    - Datum
+    - Parameter_Name
+    - Sample_Duration
+    - Pollutant_Standard
+    - Date_Local
+    - Units_of_Measure
+    - Event_Type
+    - Observation_Count
+    - Observation_Percent
+    - Arithmetic_Mean
+    - st_Max_Value
+    - st_Max_Hour
+    - AQI
+    - Method_Code
+    - Method_Name
+    - Local_Site_Name
+    - Address
+    - State_Name
+    - County_Name
+    - City_Name
+    - CBSA_Name
+    - Date_of_Last_Change
+  row:
+    - date 
+    - latitude
+    - longitude
+    - datum
+    - aqi
+    - parameter_name
+    - mean_value
+    - max_value
+    - max_hour
+    - units_of_measure
+    - event_type
+    - observation_count
+    - observation_percent
+    - sample_duration
+    - pollutant_standard
+    - method_code
+    - method_name
+    - site_num
+    - local_site_name
+    - address
+    - state_name
+    - county_name
+    - city_name
+    - cbsa_name
+    - date_last_changed
+  column_mappings:
+    date: Date_Local
+    latitude: Latitude
+    longitude: Longitude
+    datum: Datum
+    aqi: AQI
+    parameter_name: Parameter_Name
+    mean_value: Arithmetic_Mean
+    max_value: st_Max_Value
+    max_hour: st_Max_Hour
+    units_of_measure: Units_of_Measure
+    event_type: Event_Type
+    observation_count: Observation_Count
+    observation_percent: Observation_Percent
+    sample_duration: Sample_Duration
+    pollutant_standard: Pollutant_Standard
+    method_code: Method_Code
+    method_name: Method_Name
+    site_num: Site_Num
+    local_site_name: Local_Site_Name
+    address: Address
+    state_name: State_Name
+    county_name: County_Name
+    city_name: City_Name
+    cbsa_name: CBSA_Name
+    date_last_changed: Date_of_Last_Change
+
+- name: noaa_global_summary_of_day
+  datasource: noaa
+  download_url: https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/
+  subsource: global_summary_of_day
+  accept_regex: ~
+  file_type: tar_gz
+  build_root: /home/ubuntu/data
+  source_root: /home/ubuntu/data/noaa
+  labeled_root: None
+  sorted_root: None
+  chunked_root: None
+  output_root: None
+  min_chunksize: 250_000
+  layout_names: 
+    - approxlat_approxlng_yyyy_mm
+    - yyyy_mm_approxlat_approxlng
+  table_names:
+    - raw
+    - default
+  header_raw:
+    - STATION
+    - DATE
+    - LATITUDE
+    - LONGITUDE
+    - ELEVATION
+    - NAME
+    - TEMP
+    - TEMP_ATTRIBUTES
+    - DEWP
+    - DEWP_ATTRIBUTES
+    - SLP
+    - SLP_ATTRIBUTES
+    - STP
+    - STP_ATTRIBUTES
+    - VISIB
+    - VISIB_ATTRIBUTES
+    - WDSP
+    - WDSP_ATTRIBUTES
+    - MXSPD
+    - GUST
+    - MAX
+    - MAX_ATTRIBUTES
+    - MIN
+    - MIN_ATTRIBUTES
+    - PRCP
+    - PRCP_ATTRIBUTES
+    - SNDP
+    - FRSHTT
+  row:
+    - station 
+    - date 
+    - latitude 
+    - longitude 
+    - elevation 
+    - name 
+    - temperature
+    - max_temperature 
+    - min_temperature 
+    - dew_point 
+    - sea_level_pressure 
+    - station_pressure
+    - visibility 
+    - wind_speed 
+    - max_wind_speed_sustained 
+    - max_wind_speed_gust
+    - precipitation 
+    - snow_depth 
+    - has_fog 
+    - has_rain_or_drizzle 
+    - has_snow_or_ice_pellets
+    - has_hail 
+    - has_thunder 
+    - has_tornado_or_funnel_cloud
+  column_mappings:
+    station: STATION
+    date: DATE
+    latitude: LATITUDE
+    longitude: LONGITUDE
+    elevation: ELEVATION
+    name: NAME
+    temperature: TEMP
+    max_temperature: MAX
+    min_temperature: MIN
+    dew_point: DEWP
+    sea_level_pressure: SLP
+    station_pressure: STP
+    visibility: VISIB
+    wind_speed: WDSP
+    max_wind_speed_sustained: MXSPD
+    max_wind_speed_gust: GUST
+    precipitation: PRCP
+    snow_depth: SNDP
+    has_fog: has_fog
+    has_rain_or_drizzle: has_rain_or_drizzle
+    has_snow_or_ice_pellets: has_snow_or_ice_pellets
+    has_hail: has_hail
+    has_thunder: has_thunder
+    has_tornado_or_funnel_cloud: has_tornado_or_funnel_cloud
+
+
+
+
+
+
+
+      
