@@ -1,64 +1,141 @@
-from airflow import DAG
-from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta, time
+
+from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
 from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.bash_operator import BashOperator
+from airflow.sensors.external_task_sensor import ExternalTaskSensor
+
+
+import sys
+sys.path.insert(0, '/home/ubuntu/code/')
+
+from gourdnet.airflow import prep
+from gourdnet.airflow import fetch
+from gourdnet.airflow import clean
+from gourdnet.airflow import sort
+from gourdnet.airflow import chunk
+
+
 import yaml
 
-default_args = {
-    'owner': 'Airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2015, 6, 1),
-    'email': ['joyyang@gmail.com'],
-    'email_on_failure': True,
-    'email_on_retry': True,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
-    # 'queue': 'bash_queue',
-    # 'pool': 'backfill',
-    # 'priority_weight': 10,
-    # 'end_date': datetime(2016, 1, 1),
-}
+def load_config(config_file):
+    with open(config_file) as file:
+        arg_list = yaml.load(file, Loader=yaml.FullLoader)
+    file.close()
+    return arg_list
 
-dag = DAG(
-    'gourd_dag', default_args=default_args, schedule_interval=timedelta(days=1))
+path = '/home/ubuntu/code/flexflow/config/data_config.yaml'
+args = load_config(path)
 
-start = DummyOperator(
-    task_id='start',
-    dag=dag
-)
 
-fetch = BashOperator(
-    task_id='fetch_ozone',
-    bash_command='python3 ~/code/gourdnet/gourdnet/airflow/fetch.py 1',
-    dag=dag)
+def create_dag(dag_id,
+               schedule,
+               default_args,
+               arg,
+               n,
+               queue):
 
-clean = BashOperator(
-    task_id='clean_ozone',
-    bash_command='python3  ~/code/gourdnet/gourdnet/airflow/clean.py 1',
-    retries=3,
-    dag=dag)
+    dag = DAG(dag_id,
+              schedule_interval=schedule,
+              default_args=default_args,
+              queue=queue)
+    
+    def prep_data():
+        prep.prep_airflow(arg,n,path)
+    
+    def fetch_data():
+        fetch.fetch_main_airflow(arg)
 
-sort = BashOperator(
-    task_id='sort_ozone',
-    bash_command='python3 ~/code/gourdnet/gourdnet/airflow/sort.py 1',
-    retries=3,
-    dag=dag)
+    def clean_data():
+        clean.clean_main_airflow(arg)
 
-chunk = BashOperator(
-    task_id='sort_ozone',
-    bash_command='python3 ~/code/gourdnet/gourdnet/airflow/chunk.py 1',
-    retries=3,
-    dag=dag)
+    def sort_data():
+        sort.sort_main_airflow(arg)
 
-clean_up = BashOperator(
-    task_id='sort_ozone',
-    bash_command='python3 ~/code/gourdnet/gourdnet/airflow/chunk.py 1',
-    retries=3,
-    dag=dag)
+    def chunk_data():
+        chunk.chunk_main_airflow(arg)
 
-end = DummyOperator(
-    task_id='end',
-    dag=dag)
 
-start >> fetch >> clean >> sort >> chunk >> clean_up >> end
+    with dag:
 
+        # sensor_prep_task = ExternalTaskSensor(
+        #     task_id='dag_sensor', 
+        #     external_dag_id = 'prep_dag', 
+        #     external_task_id = None, 
+        #     mode = 'reschedule'
+        # )
+        
+        start = DummyOperator(
+            task_id='start'
+            )
+
+        prep_task = PythonOperator(
+            task_id='prep',
+            python_callable=prep_data
+            )
+
+        fetch_task = PythonOperator(
+            task_id='fetch',
+            python_callable=fetch_data
+            )
+        
+        clean_task = PythonOperator(
+            task_id='clean',
+            python_callable=clean_data
+            )
+        
+        sort_task = PythonOperator(
+            task_id='sort',
+            python_callable=sort_data
+            )
+        
+        chunk_task = PythonOperator(
+            task_id='chunk',
+            python_callable=chunk_data
+            )
+        
+        end = DummyOperator(
+            task_id='end'
+            )
+         
+        start >> prep_task >> fetch_task >> clean_task >> sort_task >> chunk_task >> end
+        # start >> prep_task >> clean_task >> sort_task >> chunk_task >> end
+
+    return dag
+
+
+
+
+
+for n,arg in enumerate(args['jobs']):
+    dag_id = '{}_job'.format(arg['name'])
+
+    default_args = {
+        'owner': 'Airflow',
+        'depends_on_past': False,
+        'start_date': datetime(2020, 2, 8),
+        'email': ['joyyang@gmail.com'],
+        'email_on_failure': True,
+        'email_on_retry': True,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5)
+        # 'queue': 'bash_queue',
+        # 'pool': 'backfill',
+        # 'priority_weight': 10,
+        # 'end_date': datetime(2016, 1, 1),
+    }
+
+    schedule = arg['schedule']
+    queue = arg['queue']
+    # schedule = '@daily'
+
+    globals()[dag_id] = create_dag(dag_id,
+                                  schedule,
+                                  default_args,
+                                  arg,
+                                  n,
+                                  queue)
+
+# if __name__ == '__main__':
+#   print(args)

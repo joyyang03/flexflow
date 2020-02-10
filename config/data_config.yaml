@@ -4,6 +4,8 @@ jobs:
   download_url: https://aqs.epa.gov/aqsweb/airdata/download_files.html
   subsource: ozone_daily_summary
   accept_regex: .*airdata/daily_44201.*
+  schedule: '@daily'
+  queue: queue_1
   file_type: zip
   build_root: /home/ubuntu/data
   source_root: /home/ubuntu/data/epa_aqs
@@ -106,6 +108,8 @@ jobs:
   download_url: https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/
   subsource: global_summary_of_day
   accept_regex: ~
+  schedule: '@daily'
+  queue: queue_2
   file_type: tar_gz
   build_root: /home/ubuntu/data
   source_root: /home/ubuntu/data/noaa
