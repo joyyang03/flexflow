@@ -38,8 +38,8 @@ def create_dag(dag_id,
 
     dag = DAG(dag_id,
               schedule_interval=schedule,
-              default_args=default_args,
-              queue=queue)
+              default_args=default_args
+              )
     
     def prep_data():
         prep.prep_airflow(arg,n,path)
@@ -67,36 +67,43 @@ def create_dag(dag_id,
         # )
         
         start = DummyOperator(
-            task_id='start'
+            task_id='start',
+            queue = queue
             )
 
         prep_task = PythonOperator(
             task_id='prep',
-            python_callable=prep_data
+            python_callable=prep_data,
+            queue = queue
             )
 
         fetch_task = PythonOperator(
             task_id='fetch',
-            python_callable=fetch_data
+            python_callable=fetch_data,
+            queue = queue
             )
         
         clean_task = PythonOperator(
             task_id='clean',
-            python_callable=clean_data
+            python_callable=clean_data,
+            queue = queue
             )
         
         sort_task = PythonOperator(
             task_id='sort',
-            python_callable=sort_data
+            python_callable=sort_data,
+            queue = queue
             )
         
         chunk_task = PythonOperator(
             task_id='chunk',
-            python_callable=chunk_data
+            python_callable=chunk_data,
+            queue = queue
             )
         
         end = DummyOperator(
-            task_id='end'
+            task_id='end',
+            queue = queue
             )
          
         start >> prep_task >> fetch_task >> clean_task >> sort_task >> chunk_task >> end
