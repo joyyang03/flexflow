@@ -6,8 +6,10 @@ jobs:
   accept_regex: .*airdata/daily_44201.*
   schedule: '@daily'
   queue: queue_1
+  s3_bucket: gourdianproject
   file_type: zip
   build_root: /home/ubuntu/data
+  build_root_current_run: None
   source_root: /home/ubuntu/data/epa_aqs
   labeled_root: None
   sorted_root: None
@@ -110,8 +112,10 @@ jobs:
   accept_regex: ~
   schedule: '@daily'
   queue: queue_2
+  s3_bucket: gourdianproject
   file_type: tar_gz
   build_root: /home/ubuntu/data
+  build_root_current_run: None
   source_root: /home/ubuntu/data/noaa
   labeled_root: None
   sorted_root: None
