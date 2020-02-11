@@ -320,7 +320,7 @@ jobs:
   subsource: co_daily_summary
   accept_regex: .*airdata/daily_42401.*
   schedule: '@daily'
-  queue: queue_2
+  queue: queue_1
   s3_bucket: gourdianproject
   file_type: zip
   build_root: /home/ubuntu/data

@@ -17,4 +17,3 @@ args = load_config('/Users/joy/documents/insight_de/flexflow/config/data_config.
 
 for arg in args['jobs']:
     print(arg)
-    stop

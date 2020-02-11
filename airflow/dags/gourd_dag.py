@@ -57,8 +57,8 @@ def create_dag(dag_id,
     def chunk_data():
         chunk.chunk_main_airflow(arg)
     
-    def store_data():
-        store.store_main_airflow(arg)
+    # def store_data():
+    #     store.store_main_airflow(arg)
 
 
     with dag:
@@ -75,11 +75,11 @@ def create_dag(dag_id,
             queue = queue
             )
 
-        prep_task = PythonOperator(
-            task_id='prep',
-            python_callable=prep_data,
-            queue = queue
-            )
+        # prep_task = PythonOperator(
+        #     task_id='prep',
+        #     python_callable=prep_data,
+        #     queue = queue
+        #     )
 
         fetch_task = PythonOperator(
             task_id='fetch',
@@ -116,8 +116,8 @@ def create_dag(dag_id,
             queue = queue
             )
          
-        start >> prep_task >> fetch_task >> clean_task >> sort_task >> chunk_task >> store_task >> end
-        # start >> prep_task >> clean_task >> sort_task >> chunk_task >> end
+        # start >> prep_task >> fetch_task >> clean_task >> sort_task >> chunk_task >> store_task >> end
+        start >> fetch_task >> clean_task >> sort_task >> chunk_task >> end
 
     return dag
 
@@ -146,6 +146,8 @@ for n,arg in enumerate(args['jobs']):
     schedule = arg['schedule']
     queue = arg['queue']
     # schedule = '@daily'
+
+    prep.prep_airflow(arg,n,path)
 
     globals()[dag_id] = create_dag(dag_id,
                                   schedule,
