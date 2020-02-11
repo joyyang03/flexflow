@@ -208,7 +208,7 @@ jobs:
     has_thunder: has_thunder
     has_tornado_or_funnel_cloud: has_tornado_or_funnel_cloud
 
-- name: epa_aqs_ozone_daily_summary
+- name: epa_aqs_so2_daily_summary
   datasource: epa_aqs
   download_url: https://aqs.epa.gov/aqsweb/airdata/download_files.html
   subsource: so2_daily_summary
@@ -314,7 +314,7 @@ jobs:
     cbsa_name: CBSA_Name
     date_last_changed: Date_of_Last_Change
 
-- name: epa_aqs_ozone_daily_summary
+- name: epa_aqs_co_daily_summary
   datasource: epa_aqs
   download_url: https://aqs.epa.gov/aqsweb/airdata/download_files.html
   subsource: co_daily_summary
@@ -420,7 +420,7 @@ jobs:
     cbsa_name: CBSA_Name
     date_last_changed: Date_of_Last_Change
 
-- name: epa_aqs_ozone_daily_summary
+- name: epa_aqs_no2_daily_summary
   datasource: epa_aqs
   download_url: https://aqs.epa.gov/aqsweb/airdata/download_files.html
   subsource: no2_daily_summary
