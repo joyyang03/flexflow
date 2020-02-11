@@ -328,8 +328,8 @@ jobs:
   source_root: /home/ubuntu/data/epa_aqs
   labeled_root: /home/ubuntu/data/epa_aqs/co_daily_summary_folder/labeled/co_daily_summary
   sorted_root: /home/ubuntu/data/epa_aqs/co_daily_summary_folder/sorted/co_daily_summary
-  chunked_root: /home/ubuntu/data/epa_aqs/co_daily_summary_folder/chunked/co_daily_summary
-  output_root: /home/ubuntu/data/epa_aqs/co_daily_summary_folder/output
+  chunked_root: /home/ubuntu/data/epa_aqs/co_daily_summary_folder/output/co_daily_summary
+  output_root: /home/ubuntu/data/epa_aqs/co_daily_summary_folder/output/
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
