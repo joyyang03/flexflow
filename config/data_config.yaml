@@ -9,12 +9,12 @@ jobs:
   s3_bucket: gourdianproject
   file_type: zip
   build_root: /home/ubuntu/data
-  build_root_current_run: ~
+  build_root_current_run: /home/ubuntu/data/epa_aqs/ozone_daily_summary_folder/
   source_root: /home/ubuntu/data/epa_aqs
-  labeled_root: ~
-  sorted_root: ~
-  chunked_root: ~
-  output_root: ~
+  labeled_root: /home/ubuntu/data/epa_aqs/ozone_daily_summary_folder/labeled/ozone_daily_summary
+  sorted_root: /home/ubuntu/data/epa_aqs/ozone_daily_summary_folder/sorted/ozone_daily_summary
+  chunked_root: /home/ubuntu/data/epa_aqs/ozone_daily_summary_folder/output/ozone_daily_summary
+  output_root: /home/ubuntu/data/epa_aqs/ozone_daily_summary_folder/output/
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
@@ -115,12 +115,12 @@ jobs:
   s3_bucket: gourdianproject
   file_type: tar_gz
   build_root: /home/ubuntu/data
-  build_root_current_run: ~
+  build_root_current_run: /home/ubuntu/data/noaa/global_summary_of_day_folder/
   source_root: /home/ubuntu/data/noaa
-  labeled_root: ~
-  sorted_root: ~
-  chunked_root: ~
-  output_root: ~
+  labeled_root: /home/ubuntu/data/noaa/global_summary_of_day_folder/labeled/global_summary_of_day
+  sorted_root: /home/ubuntu/data/noaa/global_summary_of_day_folder/sorted/global_summary_of_day
+  chunked_root: /home/ubuntu/data/noaa/global_summary_of_day_folder/output/global_summary_of_day
+  output_root: /home/ubuntu/data/noaa/global_summary_of_day_folder/output/
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
@@ -218,12 +218,12 @@ jobs:
   s3_bucket: gourdianproject
   file_type: zip
   build_root: /home/ubuntu/data
-  build_root_current_run: ~
+  build_root_current_run: /home/ubuntu/data/epa_aqs/so2_daily_summary_folder/
   source_root: /home/ubuntu/data/epa_aqs
-  labeled_root: ~
-  sorted_root: ~
-  chunked_root: ~
-  output_root: ~
+  labeled_root: /home/ubuntu/data/epa_aqs/so2_daily_summary_folder/labeled/so2_daily_summary
+  sorted_root: /home/ubuntu/data/epa_aqs/so2_daily_summary_folder/sorted/so2_daily_summary
+  chunked_root: /home/ubuntu/data/epa_aqs/so2_daily_summary_folder/output/so2_daily_summary
+  output_root: /home/ubuntu/data/epa_aqs/so2_daily_summary_folder/output/
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
@@ -430,12 +430,12 @@ jobs:
   s3_bucket: gourdianproject
   file_type: zip
   build_root: /home/ubuntu/data
-  build_root_current_run: ~
+  build_root_current_run: /home/ubuntu/data/epa_aqs/no2_daily_summary_folder/
   source_root: /home/ubuntu/data/epa_aqs
-  labeled_root: ~
-  sorted_root: ~
-  chunked_root: ~
-  output_root: ~
+  labeled_root: /home/ubuntu/data/epa_aqs/no2_daily_summary_folder/labeled/no2_daily_summary
+  sorted_root: /home/ubuntu/data/epa_aqs/no2_daily_summary_folder/sorted/no2_daily_summary
+  chunked_root: /home/ubuntu/data/epa_aqs/no2_daily_summary_folder/output/no2_daily_summary
+  output_root: /home/ubuntu/data/epa_aqs/no2_daily_summary_folder/output/
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
