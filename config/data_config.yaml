@@ -9,12 +9,12 @@ jobs:
   s3_bucket: gourdianproject
   file_type: zip
   build_root: /home/ubuntu/data
-  build_root_current_run: None
+  build_root_current_run: ~
   source_root: /home/ubuntu/data/epa_aqs
-  labeled_root: None
-  sorted_root: None
-  chunked_root: None
-  output_root: None
+  labeled_root: ~
+  sorted_root: ~
+  chunked_root: ~
+  output_root: ~
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
@@ -115,12 +115,12 @@ jobs:
   s3_bucket: gourdianproject
   file_type: tar_gz
   build_root: /home/ubuntu/data
-  build_root_current_run: None
+  build_root_current_run: ~
   source_root: /home/ubuntu/data/noaa
-  labeled_root: None
-  sorted_root: None
-  chunked_root: None
-  output_root: None
+  labeled_root: ~
+  sorted_root: ~
+  chunked_root: ~
+  output_root: ~
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
@@ -218,12 +218,12 @@ jobs:
   s3_bucket: gourdianproject
   file_type: zip
   build_root: /home/ubuntu/data
-  build_root_current_run: None
+  build_root_current_run: ~
   source_root: /home/ubuntu/data/epa_aqs
-  labeled_root: None
-  sorted_root: None
-  chunked_root: None
-  output_root: None
+  labeled_root: ~
+  sorted_root: ~
+  chunked_root: ~
+  output_root: ~
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
@@ -324,12 +324,12 @@ jobs:
   s3_bucket: gourdianproject
   file_type: zip
   build_root: /home/ubuntu/data
-  build_root_current_run: None
+  build_root_current_run: ~
   source_root: /home/ubuntu/data/epa_aqs
-  labeled_root: None
-  sorted_root: None
-  chunked_root: None
-  output_root: None
+  labeled_root: ~
+  sorted_root: ~
+  chunked_root: ~
+  output_root: ~
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
@@ -430,12 +430,12 @@ jobs:
   s3_bucket: gourdianproject
   file_type: zip
   build_root: /home/ubuntu/data
-  build_root_current_run: None
+  build_root_current_run: ~
   source_root: /home/ubuntu/data/epa_aqs
-  labeled_root: None
-  sorted_root: None
-  chunked_root: None
-  output_root: None
+  labeled_root: ~
+  sorted_root: ~
+  chunked_root: ~
+  output_root: ~
   min_chunksize: 250_000
   layout_names: 
     - approxlat_approxlng_yyyy_mm
