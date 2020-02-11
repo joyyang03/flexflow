@@ -15,6 +15,7 @@ from gourdnet.airflow import fetch
 from gourdnet.airflow import clean
 from gourdnet.airflow import sort
 from gourdnet.airflow import chunk
+from gourdnet.airflow import store
 
 
 import yaml
@@ -55,6 +56,9 @@ def create_dag(dag_id,
 
     def chunk_data():
         chunk.chunk_main_airflow(arg)
+    
+    def store_data():
+        store.store_main_airflow(arg)
 
 
     with dag:
@@ -100,13 +104,19 @@ def create_dag(dag_id,
             python_callable=chunk_data,
             queue = queue
             )
+
+        store_task = PythonOperator(
+            task_id='store',
+            python_callable=store_data,
+            queue = queue
+            )
         
         end = DummyOperator(
             task_id='end',
             queue = queue
             )
          
-        start >> prep_task >> fetch_task >> clean_task >> sort_task >> chunk_task >> end
+        start >> prep_task >> fetch_task >> clean_task >> sort_task >> chunk_task >> store_task >> end
         # start >> prep_task >> clean_task >> sort_task >> chunk_task >> end
 
     return dag
