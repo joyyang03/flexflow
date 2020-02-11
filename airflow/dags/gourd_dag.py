@@ -146,8 +146,8 @@ for n,arg in enumerate(args['jobs']):
     schedule = arg['schedule']
     queue = arg['queue']
     # schedule = '@daily'
-    if not arg['sorted_root']:
-        arg = prep.prep_airflow(arg,n,path)
+    # if not arg['sorted_root']:
+    #     arg = prep.prep_airflow(arg,n,path)
 
     globals()[dag_id] = create_dag(dag_id,
                                   schedule,
