@@ -56,6 +56,10 @@ Link to Redis.
 ```
 broker_url = redis://server_name:6379/0
 ```
+Set Celery metadata database.
+```
+result_backend = db+postgresql://postgres:password@server/airflow
+```
 If you don't want to see example DAGs in the web UI, change load example to false.
 ```
 load_examples = False
