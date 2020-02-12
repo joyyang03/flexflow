@@ -1,6 +1,6 @@
 # Flexflow
 
-This is a consulting project for Gourdian, Inc through Insight Data Engineering program. The code exposed here are for automating DAG creation and distributed processing in Airflow.
+This is a consulting project for Gourdian, Inc through Insight Data Engineering program. The code exposed here are for automating DAG creation using a YAML config file and distributed processing in Airflow. This allows for flexible execution without changing the underflying code base and scaling workloads to adapt to the business needs.
 
 ## Architecture
 Airflow scheduler runs in the master node. There are 2 Celery workers. Redis acts as message broker in this case to pass messages from Celery queue to Celery worker queues. All metadata about the state of tasks and DAGs get stored in PostgreSQL database.
