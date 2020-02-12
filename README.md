@@ -4,7 +4,7 @@ This is a consulting project for Gourdian, Inc through Insight Data Engineering 
 
 ## Architecture
 Airflow scheduler runs in the master node. There are 2 Celery workers. Redis acts as message broker in this case to pass messages from Celery queue to Celery worker queues. All metadata about the state of tasks and DAGs get stored in PostgreSQL database.
-![architecture](link-to-image)
+![architecture](images/architecture.png)
 
 ## Getting Started
 
